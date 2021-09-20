@@ -1,0 +1,678 @@
+﻿
+@{
+    ViewBag.Title = "PersonInfo";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dev Skills Assessment</title>
+
+    <!-- CSS Includes -->
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <style type="text/css">
+        .field-validation-error {
+            color: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div ng-app="app" ng-controller="angularController">
+            <tr ng-show="showPersonAdd">
+                <td>
+                    <table width="99%">
+                        <tr>
+                            <td align="right">
+                                <input type="button" value="Add PERSON" style="background-color:#e5390f;color:#FFFFFF;font-size:large;width:200px;
+                              border-color:#a2aabe;border-style:dashed;border-width:2px;" ng-click="showPerson()" />
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr ng-show="addEditPerson">
+                <td>
+                    <table style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding: 5px;width: 99%;table-layout:fixed;" cellpadding="2" cellspacing="2">
+                        <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                            <td>
+                                <h3> Add/Edit Person</h3>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+                                        <td width="20"></td>
+                                        <td valign="top">
+                                            <form novalidate name="f2" ng-submit="saveDetails()">
+                                                <table style="color:#9F000F;font-size:large" cellpadding="4" cellspacing="6">
+
+                                                    <tr>
+                                                        <td>
+                                                            <b>Code : </b>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="text" name="txtCode" ng-model="code" value="0" style="background-color:tan" readonly />
+                                                            <br />
+
+                                                        </td>
+
+
+                                                        <td>
+                                                            <b> Name : </b>
+                                                        </td>
+
+                                                        <td>
+
+                                                            <input type="text" name="txtName" ng-model="Name" placeholder=" Name..." required />
+                                                            <br />
+                                                            <span class="error" ng-show="(f2.file.$dirty || IsFormSubmitted) && f2.txtName.$error.required"> Name required!</span>
+
+                                                        </td>
+                                                    </tr>
+
+
+                                                    <tr>
+                                                        <td>
+                                                            <b>Surname : </b>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="text" name="txtSurname" ng-model="Surname" placeholder=" Surname..." required />
+                                                            <br />
+                                                            <span class="error" ng-show="(f2.file.$dirty || IsFormSubmitted) && f2.txtSurname.$error.required">Surname required!</span>
+
+                                                        </td>
+
+
+                                                        <td>
+                                                            <b> ID Number : </b>
+                                                        </td>
+
+                                                        <td>
+
+                                                            <input type="text" name="txtid_number" ng-model="id_number" placeholder=" ID Name ..." required />
+                                                            <br />
+                                                            <span class="error" ng-show="(f2.file.$dirty || IsFormSubmitted) && f2.txtid_number.$error.required">ID Number required!</span>
+
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+
+                                                        <td colspan="4">
+
+
+                                                            <input type="submit" value="Save details" style="background-color:#336699;color:#FFFFFF" required />
+
+                                                        </td>
+                                                    </tr>
+
+
+
+                                                </table>
+
+                                            </form>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <img src="~/Images/blank.gif" alt="" width="1" height="4" />
+
+
+                </td>
+            </tr>
+
+
+            @* Add /Edit Detail *@
+
+            <tr ng-show="addEditPersonDetail">
+                <td>
+                    <table style=" background-color:#FFFFFF; border: dashed 3px #6D7B8D; padding: 5px;width: 99%;table-layout:fixed;" cellpadding="2" cellspacing="2">
+                        <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                            <td>
+                                <h3> Add/Edit Person Detail</h3>
+                            </td>
+
+                        </tr>
+                        <tr>
+                            <td>
+                                <table>
+                                    <tr>
+
+                                        <td width="20"></td>
+                                        <td valign="top">
+                                            <form novalidate name="f1" ng-submit="savePersonDetails()">
+                                                <table style="color:#9F000F;font-size:large" cellpadding="4" cellspacing="6">
+
+                                                    <tr>
+                                                        <td>
+                                                            <b>Code : </b>
+                                                        </td>
+
+                                                        <td>
+                                                            <input type="text" name="txtcode" ng-model="code" value="0" style="background-color:tan" readonly />
+                                                            <br />
+
+                                                        </td>
+
+
+                                                        <td>
+                                                            <b> Person Code : </b>
+                                                        </td>
+
+                                                        <td>
+
+                                                            <input type="text" name="txtpersoncode" ng-model="person_code" value="0" style="background-color:tan" readonly />
+                                                            <br />
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            <b> Account : </b>
+                                                        </td>
+
+                                                        <td>
+
+                                                            <input type="text" name="txtAccount" ng-model="account_number" placeholder=" Account Number ..." required />
+                                                            <br />
+                                                            <span class="error" ng-show="(f1.file.$dirty || IsFormSubmitted) && f1.txtAccount.$error.required">txtAccount required!</span>
+
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+
+                                                        <td>
+                                                            <b> Balance : </b>
+                                                        </td>
+
+                                                        <td>
+
+                                                            <input type="text" name="txtbalance" ng-model="outstanding_balance" value="0" placeholder=" outstanding balance ..." required />
+                                                            <br />
+                                                            <span class="error" ng-show="(f1.file.$dirty || IsFormSubmitted) && f1.txtB.$error.required">Balance required!</span>
+
+                                                        </td>
+                                                    </tr>
+
+                                                    <tr>
+
+                                                        <td colspan="2">
+
+                                                            <input type="submit" value="Save Data" style="background-color:#336699;color:#FFFFFF" required />
+
+                                                        </td>
+                                                    </tr>
+
+
+
+                                                </table>
+
+                                            </form>
+                                        </td>
+
+                                    </tr>
+
+                                </table>
+                            </td>
+                        </tr>
+
+                    </table>
+
+                    <img src="~/Images/blank.gif" alt="" width="1" height="4" />
+
+
+                </td>
+            </tr>
+
+
+
+            <tr ng-show="PersonList">
+
+                <td>
+                    <table style=" background-color:#FFFFFF; border: solid 2px #6D7B8D; padding: 5px;width: 99%;table-layout:fixed;" cellpadding="2" cellspacing="2">
+                        <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                            <td width="100"></td>
+                            <td width="40" align="center"><b>Edit</b></td>
+                            <td width="40" align="center"><b>Delete</b></td>
+                            <td width="180" align="center" ng-click="predicate = 'code'; reverse=!reverse" style="cursor: pointer;">
+                                <b>Code</b> &nbsp;<img src="~/Images/sortNo.jpg" />
+                            </td>
+                            <td width="180" align="center" ng-click="predicate = 'Surname'; reverse=!reverse" style="cursor: pointer;">
+                                <b>Surname</b>
+                                &nbsp;<img src="~/Images/sortA.jpg" />
+                            </td>
+                            <td width="200" align="center" ng-click="predicate = 'id_number'; reverse=!reverse" style="cursor: pointer;">
+                                <b>ID Number</b>
+                                &nbsp;<img src="~/Images/sortA.jpg" />
+                            </td>
+                            <td width="200" align="center" ng-click="predicate = 'account_number'; reverse=!reverse" style="cursor: pointer;">
+                                <b>Account Number</b>
+                                &nbsp;<img src="~/Images/sortA.jpg" />
+                            </td>
+                        </tr>
+                        <tr style="height: 30px; background-color:#336699 ; color:#FFFFFF ;border: solid 1px #659EC7;">
+                            <td width="100" align="center" colspan="3">
+                                <img src="~/Images/filter.png" />  Filter By
+                            </td>
+                            <td width="170" align="center" style="border: solid 1px #FFFFFF; padding: 5px;table-layout:fixed;">
+                                <input ng-model="search.code" placeholder="Code..." width="90">
+                            </td>
+                            <td width="200" align="center" style="border: solid 1px #FFFFFF; padding: 5px;table-layout:fixed;">
+                            </td>
+                            <td width="180" align="center" style="border: solid 1px #FFFFFF; padding: 5px;table-layout:fixed;">
+                                <input ng-model="search.Surname" placeholder="Surname...">
+                            </td>
+
+                            <td width="200" align="center" style="border: solid 1px #FFFFFF; padding: 5px;table-layout:fixed;">
+                            </td>
+                        </tr>
+                        <tbody>
+                            <tr ng-repeat="item in items | filter:search | orderBy:predicate:reverse">
+
+                                <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">
+
+                                        <input type="button" id="Detail" value="Detail" ng-click="PersonDetailDisplay(stds.code)" />
+
+                                    </span>
+                                </td>
+                                <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">
+                                        <img src="~/Images/edit.gif" alt="Edit" width="24px" height="24px" ng-click="PersonEdit(stds.code,stds.Name,stds.Surname,stds.id_number)">
+                                    </span>
+                                </td>
+
+                                <td align="center" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">
+                                        <img src="~/Images/delete.gif" alt="Delete" width="24px" height="24px" ng-click="PersonDelete(stds.code)">
+                                    </span>
+                                </td>
+
+                                <td align="left" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">{{item.code}}</span>
+                                </td>
+
+                                <td align="left" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">{{item.Surname}}</span>
+                                </td>
+
+                                <td align="left" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">{{item.id_number}}</span>
+                                </td>
+
+                                <td align="left" style="border: solid 1px #659EC7; padding: 5px;table-layout:fixed;">
+                                    <span style="color:#9F000F">{{item.account_number}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
+
+    <!-- JS includes -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <script src="//ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+    <script src="//ajax.aspnetcdn.com/ajax/mvc/4.0/jquery.validate.unobtrusive.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.3.8/angular.min.js"></script>
+    <script type="text/javascript">
+    angular
+        .module('app', [])
+        .controller('angularController', function ($scope, $http) {
+            $scope.date = new Date();
+            $scope.MyName = "LUYOLO THEO NGATI";
+            //For Person Search
+            $scope.code = "";
+            $scope.Surname = "";
+
+            //This variable will be used for Insert/Edit/Delete Person Table.
+            $scope.code = 0;
+            $scope.Surname = "";
+            $scope.Name = "";
+            $scope.id_number= "";
+
+            //Show Hide Person Table
+            $scope.showPersonAdd = true;
+            $scope.addEditPerson = false;
+            $scope.PersonList = true;
+            $scope.showItem = true;
+
+            //This variable will be used for Insert/Edit/Delete persoen Detail Table.
+            $scope.code = 0;
+            $scope.person_code = 0;
+            $scope.account_number = "";
+            $scope.outstanding_balance = "";
+
+
+
+            $scope.addEditPersonDetail = false;
+            $scope.expandImg = "expand.png";
+
+            selectPerson($scope.codes, $scope.Surnames);
+            $http.get('@Url.RouteUrl(new{ action="GetPersons", controller="Home"})')
+                .success(function (data) {
+                    $scope.items = data;
+                    $scope.PersonList = true;
+                });
+            selectPerson();
+
+            function selectPerson() {
+
+
+                $http.get('/api/PersonApi/').success(function (data) {
+                    $scope.Person = data;
+
+                    $scope.showPersonAdd = true;
+                    $scope.addEditPerson = false;
+                    $scope.PersonList = true;
+                    $scope.showItem = true;
+                    $scope.addEditPersonDetail = false;
+
+                    if ($scope.Person.length > 0) {
+
+                    }
+                })
+                    .error(function () {
+                        $scope.error = "An Error has occured while loading posts!";
+                    });
+            }
+
+
+            //Search
+            $scope.searchPerson = function () {
+
+                selectPerson();
+            }
+
+            //Edit Person Details
+            $scope.PersonEdit = function PersonEdit(codes, Name, Surname, id_number) {
+                cleardetails();
+                $scope.code = codes;
+                $scope.Name = Name
+                $scope.Surname = Surname;
+                $scope.id_number = id_number;
+
+                $scope.addEditPersonDetail = false;
+                $scope.showPersonAdd = true;
+                $scope.addEditPerson = true;
+                $scope.PersonList = true;
+                $scope.showItem = true;
+            }
+
+            //Delete Person Detail
+            $scope.PersonDelete = function PersonDelete(codes) {
+                cleardetails();
+                $scope.code = codes;
+
+                var delConfirm = confirm("Are you sure you want to delete the person" + codes + " ?");
+                if (delConfirm == true) {
+                    //   alert($scope.code);
+                    $http.get('/api/PersonApi/deletePerson/', { params: { code: $scope.code } }).success(function (data) {
+                        // alert(data);
+                        $scope.PersonDeleted = data;
+                        alert($scope.PersonDeleted);
+                        cleardetails();
+                        selectPerson();
+                    })
+                        .error(function () {
+                            $scope.error = "An Error has occured while loading posts!";
+                        });
+
+                }
+            }
+
+            // New Person Add Details
+            $scope.showPerson = function () {
+                cleardetails();
+                $scope.addEditPersonDetail = false;
+                $scope.showPersonAdd = true;
+                $scope.addEditPerson = true;
+                $scope.PersonList = true;
+                $scope.showItem = true;
+
+            }
+
+            //clear all the control values after insert and edit.
+            function cleardetails() {
+                $scope.code = 0;
+                $scope.Name = "";
+                $scope.Surname = "";
+                $scope.id_number = "";
+
+            }
+
+            //Form Validation
+            $scope.Message1 = "";
+            $scope.IsFormSubmitted1 = false;
+
+            $scope.IsFormValid1 = false;
+
+            $scope.$watch("f2.$valid", function (isValid) {
+                $scope.IsFormValid1 = isValid;
+
+            });
+
+            $scope.Message = "";
+            $scope.IsFormSubmitted = false;
+
+            $scope.IsFormValid = false;
+
+            $scope.$watch("f1.$valid", function (isValid) {
+                $scope.IsFormValid = isValid;
+
+            });
+
+            //Save Person
+            $scope.saveDetails = function () {
+                $scope.IsFormSubmitted1 = true;
+                if ($scope.IsFormValid1) {
+
+                    //if the Person ID=0 means its new Person insert here i will call the Web api insert method
+                    if ($scope.code == 0) {
+
+                        $http.get('/api/PersonApi/InsertPerson/').success(function (data) {
+
+                            $scope.PersonInserted = data;
+                            alert($scope.PersonInserted);
+                            cleardetails();
+                            selectPerson('', '');
+                        })
+                            .error(function () {
+                                $scope.error = "An Error has occured while loading posts!";
+                            });
+                    }
+                    else {  // to update to the  details
+                        $http.get('/api/PersonApi/updatePerson/').success(function (data) {
+                            $scope.PersonUpdated = data;
+                            alert($scope.PersonUpdated);
+
+                            cleardetails();
+                            selectPerson();
+
+                        })
+                            .error(function () {
+                                $scope.error = "An Error has occured while loading posts!";
+                            });
+                    }
+                }
+                else {
+                    $scope.Message1 = "All the fields are required.";
+                }
+
+
+
+            }
+
+            // To Hide and Display Detail Table
+            $scope.isRowHidden = false;
+            Hidetables()
+            function Hidetables() {
+
+                $scope.isRowHidden = false;
+            }
+
+            $scope.PersonUpdated = 0;
+            $scope.main = this;
+            this.activeRow = "0";
+
+            //Display person Detail Grid
+            $scope.Balance = 0;
+            $scope.totalQty = 0;
+            $scope.PersonDetailDisplay = function PersonDetailDisplay(codes) {
+
+                $scope.code = codes;
+                this.activeRow = 0;
+
+                if ($scope.isRowHidden == false) {
+                    this.activeRow = codes;
+                    $scope.isRowHidden = true;
+                }
+                else {
+                    this.activeRow = 0;
+                    $scope.isRowHidden = false;
+                }
+
+                $http.get('/api/PersonApi/').success(function (data) {
+                    $scope.PersonDetailDisp = data;
+                    $scope.Balance = 0;
+
+
+                    for (count = 0; count < $scope.PersonDetailDisp.length; count++) {
+                        $scope.Balance += parseInt($scope.PersonDetailDisp[count].Balance);
+
+                    }
+                })
+                    .error(function () {
+                        $scope.error = "An Error has occured while loading posts!";
+                    });
+            }
+
+
+            //Save Person Details
+
+            //clear all the control values after insert and edit.
+            function clearPersondetails() {
+                $scope.code = 0;
+                $scope.person_code = 0;
+                $scope.account_number = "";
+                $scope.outstanding_balance = "";
+            }
+
+
+
+            //Save Person
+            $scope.savePersonDetails = function () {
+
+                $scope.IsFormSubmitted = true;
+                if ($scope.IsFormValid) {
+                    // alert($scope.code);
+                    //if the Person ID=0 means its new Person insert here i will call the Web api insert method
+                    if ($scope.code == 0) {
+                        //  alert($scope.code)  code,person_code,account_number, outstanding_balance
+                        $http.get('/api/PersonApi/insertPersonDetail/', { params: { code: $scope.code, person_code: $scope.person_code, account_number: $scope.account_number, outstanding_balance: $scope.outstanding_balance} }).success(function (data) {
+
+                            $scope.PersonDetailDisp = data;
+                            alert($scope.PersonDetailDisp);
+
+
+                            clearPersondetails();
+                            selectPerson();
+
+                        })
+                            .error(function () {
+                                $scope.error = "An Error has occured while loading posts!";
+                            });
+                    }
+                    else {  // to update to the  details
+                        $http.get('/api/PersonApi/updatePersonDetail/').success(function (data) {
+                            $scope.PersonDetailUpdated = data;
+                            alert($scope.PersonDetailUpdated);
+
+                            clearPersondetails();
+                            selectPerson('', '');
+
+                        })
+                            .error(function () {
+                                $scope.error = "An Error has occured while loading posts!";
+                            });
+                    }
+
+                }
+                else {
+                    $scope.Message = "All the fields are required.";
+                }
+
+
+            }
+            // New Detail Add
+            $scope.showNewPersonDetails = function () {
+
+                clearPersondetails();
+                $scope.showPersonAdd = false;
+                $scope.addEditPerson = false;
+                $scope.PersonList = true;
+                $scope.showItem = true;
+
+                $scope.addEditPersonDetail = true;
+
+            }
+
+            //Edit Person Details
+            $scope.PersonDetailEdit = function PersonEdit(code, person_code, account_number, outstanding_balance) {
+                clearPersondetails();
+
+                $scope.code = code
+                $scope.person_code = person_code
+                $scope.account_number = account_number;
+                $scope.outstanding_balance = outstanding_balance;
+
+
+                $scope.showPersonAdd = false;
+                $scope.addEditPerson = false;
+                $scope.PersonList = true;
+                $scope.showItem = true;
+
+                $scope.addEditPersonDetail = true;
+            }
+
+            //Delete Dtudent Detail
+            $scope.PersonDetailDelete = function PersonDelete(code) {
+                clearPersondetails();
+                $scope.code = code;
+
+                var delConfirm = confirm("Are you sure you want to delete the Persorn " + code + " ?");
+                if (delConfirm == true) {
+
+                    //alert($scope.code);
+                    $http.get('/api/PersonApi/deletePersonDetail/', { params: { code: $scope.code } }).success(function (data) {
+
+                        $scope.PersonDetailDeleted = data;
+                        alert($scope.PersonDetailDeleted);
+                        clearPersondetails();
+                        selectPerson('', '');
+                    })
+                        .error(function () {
+                            $scope.error = "An Error has occured while loading posts!";
+                        });
+
+                }
+            }
+        });
+    </script>
+</body>
+</html>
