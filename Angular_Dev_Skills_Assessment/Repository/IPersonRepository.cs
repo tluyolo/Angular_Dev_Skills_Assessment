@@ -9,9 +9,12 @@ namespace Angular_Dev_Skills_Assessment.Repository
 {
     interface IPersonRepository 
     {
-        Person SelectFicaStatusByFicaId(string id);
-        List<Person> PersonSelectListByCode(string id);
-        List<Person> SelectDetails(string ids);
+        string AddPersonDetails();
+        string AddPerson(Person person);
+        string PutPerson(Person person);
+        string PutPersonDetails();
+        string DeletePersonDetails(int code);
+        string DeletePerson(int code);
 
     }
 }

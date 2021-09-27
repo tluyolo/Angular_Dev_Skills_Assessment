@@ -5,18 +5,19 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
 using System.Web;
 
 namespace Angular_Dev_Skills_Assessment.Repository
 {
-    public class PersonRepository
+    public class PersonRepository : IPersonRepository
     {
      
         private SqlCommand cmd;
 
 
         string constr = ConfigurationManager.ConnectionStrings["constr"].ConnectionString;
-        //int code, string name, string surname, string id_number
+      
         public string AddPerson(Person person)
         {
             using (SqlConnection con = new SqlConnection(constr))
