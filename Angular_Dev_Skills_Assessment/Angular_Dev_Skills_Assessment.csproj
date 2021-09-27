@@ -140,7 +140,9 @@
     </Compile>
     <Compile Include="Models\PersonsDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repository\IPersonRepository.cs" />
     <Compile Include="Repository\PersonRepository.cs" />
+    <Compile Include="Services\EntityPersonService.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />

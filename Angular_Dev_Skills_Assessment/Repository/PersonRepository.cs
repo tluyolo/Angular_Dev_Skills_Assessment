@@ -113,8 +113,8 @@ namespace Angular_Dev_Skills_Assessment.Repository
             {
                 using (cmd = new SqlCommand("INSERT INTO Acc (code,person_code,account_number, outstanding_balance) VALUES (@code,@person_code,@account_number, @outstanding_balance)"))
                 {
-                    cmd.Parameters.AddWithValue("@code", acc.acc_code);
-                    cmd.Parameters.AddWithValue("@person_code", acc.code);                
+                    cmd.Parameters.AddWithValue("@code", acc.code);
+                    cmd.Parameters.AddWithValue("@person_code", acc.person_code);                
                     cmd.Parameters.AddWithValue("@account_number", acc.account_number);
                     cmd.Parameters.AddWithValue("@outstanding_balance", acc.outstanding_balance);
                     cmd.Connection = con;
@@ -147,7 +147,7 @@ namespace Angular_Dev_Skills_Assessment.Repository
             {
                 using (SqlCommand cmd = new SqlCommand(query))
                 {
-                    cmd.Parameters.AddWithValue("@code", acc.acc_code);
+                    cmd.Parameters.AddWithValue("@code", acc.code);
                     cmd.Parameters.AddWithValue("@person_code", acc.code);
                     cmd.Parameters.AddWithValue("@account_number", acc.account_number);
                     cmd.Parameters.AddWithValue("@outstanding_balance", acc.outstanding_balance);
